@@ -186,6 +186,51 @@ def process_am(am_lines):
 
     return images,links,names,prices;
 
+###########################################################################################################
+
+def process_cr(cr_lines):
+    links = [];
+    images = [];
+    names = [];
+    prices = [];
+    flag = 0;
+    counter = 0;
+    
+#urllib has a very strange behaviour when retrieving webpages - The server hands out slightly difficult code to parse.
+    flag = 0;
+    base = "http://www.cromaretail.com"
+    for l in cr_lines:
+        print l;
+        try:
+            if ("<article><a title=" in l) and ("href" in l) and ("<img src=\"" in l):
+                print l;
+                ind =l.index("<article><a title=")+len("<article><a title=\"");
+                indend = l.index("\"",ind+1);
+                names.append(l[ind:indend]);
+
+                ind =l.index("href=\"")+len("href=\"");
+                indend = l.index("\"",ind+1);
+                links.append(base+"/"+l[ind:indend]);
+                
+                ind =l.index("<img src=\"")+len("<img src=\"");
+                indend = l.index("\"",ind+1);
+                images.append(base+l[ind:indend]);
+                flag =1;
+            if ("</span>" in l) and flag ==1:
+                ind =l.index("</span>")+len("</span>");
+                indend = l.index("<",ind+1);
+                prices.append(l[ind:indend]);
+                counter += 1;
+                flag =0;
+        except ValueError:
+            continue;
+        if counter == 3:
+            break;
+
+    return images,links,names,prices;
+
+
+
 if __name__=="__main__":
     proxy = 'http://10.93.0.37:3333';
     search_query = raw_input("Enter the name to compare : ");
@@ -195,20 +240,20 @@ if __name__=="__main__":
     Flipkart_query = "http://www.flipkart.com/all-categories/pr?p%5B%5D=sort%3Drelevance&sid=search.flipkart.com&q="+search_query;
     Amazon_query = "http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords="+search_query+"&rh=i%3Aaps%2Ck%3A"+search_query;
     Croma_query = "http://www.cromaretail.com/productsearch.aspx?txtSearch="+search_query+"&x=-808&y=-85";
-    Ebay_query = "http://www.ebay.in/sch/i.html?_trksid=p2050601.m570.l1313.TR0.TRC0.Xsamsung&_nkw=samsung&_sacat=0&_from=R40"
+    Ebay_query = "http://www.ebay.in/sch/i.html?_trksid=p2050601.m570.l1313.TR0.TRC0.X"+search_query+"&_nkw="+search_query+"&_sacat=0&_from=R40";
 
 
 #    Flipkart = urllib.urlopen(Flipkart_query, proxies={'http': proxy})
-    Amazon = urllib.urlopen(Amazon_query, proxies={'http': proxy})
+#    Amazon = urllib.urlopen(Amazon_query, proxies={'http': proxy})
 #    Croma = urllib.urlopen(Croma_query, proxies={'http': proxy})
+    Ebay = urllib.urlopen(Ebay_query, proxies={'http': proxy})
 
 #    fk_lines = Flipkart.readlines();
 #    am_lines = Amazon.readlines();
-    cr_lines = Croma.readlines();
-#    eb_lines = Ebay.readlines();
+#    cr_lines = Croma.readlines();
+    eb_lines = Ebay.readlines();
 
-#    prod_fk =process_fk(fk_lines);#    product_fk,images_fk = 
-    
-    product_am = process_am(am_lines);
-#    product_cr,images_cr = process_cr(cr_lines);
-#    product_eb,images_eb = process_eb(eb_lines);
+#    prod_fk =process_fk(fk_lines);    
+#    product_am = process_am(am_lines);
+#    product_cr = process_cr(cr_lines);
+#    product_eb = process_eb(eb_lines);
