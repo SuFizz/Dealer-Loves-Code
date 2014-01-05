@@ -1,3 +1,0 @@
-e = open("flip.html","w")
-e.writelines(am_lines)
-e.close()
