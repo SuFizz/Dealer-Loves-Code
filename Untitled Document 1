@@ -1,0 +1,25 @@
+def process_fk(fk_lines):
+    #I need to search till I find the div element like this : <div class='product
+    product_image = [];
+    product_name = [];
+    flag = 0;
+    counter = 0;
+    for l in fk_lines:
+#        if "<div class=\'product" in l:
+#            flag = 1;
+        if flag == 0 and "<img src=" in l:
+            flag =1;
+            continue;
+
+        if flag == 1 and "<img src=" in l:
+            product_image.append(l);
+            ++counter;
+            if(counter==12):
+                break;
+#            print l;
+#            print stuff;
+#            product_image.append(stuff[1]);
+#            product_name.append(stuff[2]);
+            flag = 0;
+    product_image = product_image[1:11];
+    return product_image

@@ -1,0 +1,4 @@
+e = open("flip.html","w")
+e.writelines(fk_lines)
+e.close()
+
