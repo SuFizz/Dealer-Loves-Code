@@ -1,13 +1,17 @@
 import urllib
 
+#def process_fk(fk_lines):
+    #I need to search till I find the div element like this : <div class='product
+
+
 if __name__=="__main__":
     proxy = 'http://10.93.0.37:3333';
     search_query = raw_input("Enter the name to compare : ");
     search_query = search_query.replace(" ","+");
 
 
-    Flipkart_query = "http://www.flipkart.com/search?q="+search_query+"&as=off&as-show=on&otracker=start";              #Flipkart - make it in terms of +###+###+
-    Amazon_query = "http://www.amazon.in/s/ref=nb_sb_ss_i_0_8?url=search-alias%3Daps&field-keywords="+search_query;     #Amazon - make it in terms of +###+###+
+    Flipkart_query = "http://www.flipkart.com/all-categories/pr?p%5B%5D=sort%3Drelevance&sid=search.flipkart.com&q="+search_query;
+    Amazon_query = "http://www.amazon.in/s/ref=nb_sb_ss_i_0_8?url=search-alias%3Daps&field-keywords="+search_query;
     Infibeam_query = "http://www.infibeam.com/search?q="+search_query;
     Jabong_query = "http://www.jabong.com/find/west/?q="+search_query;
     Jewelskart_query = "http://www.jewelskart.com/catalogsearch/result/?cat=0&q="+search_query+"#cat=0&q="+search_query+"&oos_searchable=Yes&gan_data=true";
@@ -31,7 +35,7 @@ if __name__=="__main__":
     Myntra = urllib.urlopen(Myntra_query, proxies={'http': proxy})
     Naaptol = urllib.urlopen(Naaptol_query, proxies={'http': proxy})
     Homeshop18 = urllib.urlopen(Homeshop18_query, proxies={'http': proxy})
-
+    Lenskart = urllib.urlopen(Lenskart_query, proxies={'http': proxy})
 
     fk_lines = Flipkart.readlines();
     am_lines = Amazon.readlines();
@@ -44,6 +48,18 @@ if __name__=="__main__":
     cr_lines = Croma.readlines();
     eb_lines = Ebay.readlines();
     hs_lines = Homeshop18.readlines();
-    
-    
-    
+    lk_lines = Lenskart.readlines();
+
+
+#    product_fk,images_fk = process_fk(fk_lines);
+#    product_am,images_am = process_am(am_lines);
+#    product_ib,images_ib = process_ib(ib_lines);
+#    product_ja,images_ja = process_ja(ja_lines);
+#    product_jk,images_jk = process_jk(jk_lines);
+#    product_lm,images_lm = process_lm(lm_lines);
+#    product_my,images_my = process_my(my_lines);
+#    product_na,images_na = process_na(na_lines);
+#    product_cr,images_cr = process_cr(cr_lines);
+#    product_eb,images_eb = process_eb(eb_lines);
+#    product_hs,images_hs = process_hs(hs_lines);
+#    product_lk,images_lk = process_lk(lk_lines);   
