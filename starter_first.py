@@ -290,17 +290,17 @@ if __name__=="__main__":
     Ebay_query = "http://www.ebay.in/sch/i.html?_trksid=p2050601.m570.l1313.TR0.TRC0.X"+search_query+"&_nkw="+search_query+"&_sacat=0&_from=R40";
 
 
-#    Flipkart = urllib.urlopen(Flipkart_query, proxies={'http': proxy})
-#    Amazon = urllib.urlopen(Amazon_query, proxies={'http': proxy})
-#    Croma = urllib.urlopen(Croma_query, proxies={'http': proxy})
+    Flipkart = urllib.urlopen(Flipkart_query, proxies={'http': proxy})
+    Amazon = urllib.urlopen(Amazon_query, proxies={'http': proxy})
+    Croma = urllib.urlopen(Croma_query, proxies={'http': proxy})
     Ebay = urllib.urlopen(Ebay_query, proxies={'http': proxy})
 
-#    fk_lines = Flipkart.readlines();
-#    am_lines = Amazon.readlines();
-#    cr_lines = Croma.readlines();
+    fk_lines = Flipkart.readlines();
+    am_lines = Amazon.readlines();
+    cr_lines = Croma.readlines();
     eb_lines = Ebay.readlines();
 
-#    prod_fk =process_fk(fk_lines);    
-#    product_am = process_am(am_lines);
-#    product_cr = process_cr(cr_lines);
-#    product_eb = process_eb(eb_lines);
+    product_fk = process_fk(fk_lines);    
+    product_am = process_am(am_lines);
+    product_cr = process_cr(cr_lines);
+    product_eb = process_eb(eb_lines);
