@@ -13,7 +13,7 @@ def link_fk_actu(product_image):
 
 def price_fk(product_image):
     print "\n\n\n\n\nPRICE FK";
-    print product_image;
+#    print product_image;
     names = [];
     for i in range(3):
         indend = product_image[i].index(";;");
@@ -47,7 +47,7 @@ def image_fk(product_image):
     img = [];
     counter = 0;
     for i in range(len(product_image)):
-        print product_image[i];
+#        print product_image[i];
         try:
             ind = product_image[i].index("data-src")+len("data-src=\"");
             ind_end1 = 10000;
@@ -168,7 +168,7 @@ def process_am(am_lines):
 #                i += 1;
             if ("<div class=\"newPrice\">" in l) or ("<div class=\"usedPrice\">" in l):
                 if flag == 1:
-                    print flag;
+#                    print flag;
                     indend =l.index("</span></span></div>");
                     ind = l.rfind("</span>",0,indend) + len("</span>");
                     prices.append(l[ind:indend]);
@@ -200,10 +200,10 @@ def process_cr(cr_lines):
     flag = 0;
     base = "http://www.cromaretail.com"
     for l in cr_lines:
-        print l;
+#        print l;
         try:
             if ("<article><a title=" in l) and ("href" in l) and ("<img src=\"" in l):
-                print l;
+#                print l;
                 ind =l.index("<article><a title=")+len("<article><a title=\"");
                 indend = l.index("\"",ind+1);
                 names.append(l[ind:indend]);
