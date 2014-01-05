@@ -229,7 +229,54 @@ def process_cr(cr_lines):
 
     return images,links,names,prices;
 
+#######################################################################################################################
 
+def process_eb(eb_lines):
+    links = [];
+    images = [];
+    names = [];
+    prices = [];
+    flag = 0;
+    counter = 0;
+    
+#urllib has a very strange behaviour when retrieving webpages - The server hands out slightly difficult code to parse.
+
+
+    for i in range(len(eb_lines)):
+#        print l;
+        l = eb_lines[i];
+        try:
+            if (" class=\"lv-1st\"></a>" in l):
+
+                Link = eb_lines[i+12];
+                Image = eb_lines[i+14];
+                Name = eb_lines[i+14];
+                Price = eb_lines[i+45];
+#                print Link,Image,Name,Price,"\n\n\n=======================\n\n\n";
+
+                ind =Link.index("<a href=\"")+len("<a href=\"");
+                indend = Link.index("\"",ind+1);
+                links.append(Link[ind:indend]);
+                
+                ind =Image.index("src=")+len("src=\"");
+                indend = Image.index("class",ind+1);
+                images.append(Image[ind:indend-2]);
+                
+                ind =Name.index("alt=")+len("alt=\"");
+                indend = Name.index(" />",ind+1);
+                names.append(Name[ind:indend-1]);
+                
+                ind =Price.index("</b>")+len("</b>");
+                indend = Price.index("<",ind+1);
+                prices.append(Price[ind:indend]);
+                counter += 1;
+                i += 50;
+        except ValueError:
+            continue;
+        if counter == 3:
+#            print images,"\n\n\n=======================\n\n\n",links,"\n\n\n=======================\n\n\n",names,"\n\n\n=======================\n\n\n",prices;
+            return images,links,names,prices;
+#            break;
 
 if __name__=="__main__":
     proxy = 'http://10.93.0.37:3333';
