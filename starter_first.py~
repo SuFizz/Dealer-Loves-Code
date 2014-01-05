@@ -203,8 +203,8 @@ if __name__=="__main__":
 #    Croma = urllib.urlopen(Croma_query, proxies={'http': proxy})
 
 #    fk_lines = Flipkart.readlines();
-#    am_lines = Amazon.readlines();
-    cr_lines = Croma.readlines();
+    am_lines = Amazon.readlines();
+#    cr_lines = Croma.readlines();
 #    eb_lines = Ebay.readlines();
 
 #    prod_fk =process_fk(fk_lines);#    product_fk,images_fk = 

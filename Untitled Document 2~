@@ -1,3 +1,3 @@
 e = open("flip.html","w")
-e.writelines(cr_lines)
+e.writelines(am_lines)
 e.close()
