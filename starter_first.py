@@ -1,8 +1,45 @@
 import urllib
 
+def buildwebpage(product_fk,product_cr,product_am,product_eb):
+#            return images,links,names,prices
+    print "<!DOCTYPE html>\n<html>";
+    print "\n<h1><em><ul>WELCOME TO DEALERSITE - ONE STOP FOR ALL YOUR SHOPPING</ul></em></h1>\n<body>"
+
+    print "\n<h1>AMAZON</h1>";
+    for i in range(3):
+        print "\n<h2>"+product_am[2][i]+"</h2>"
+        print "<img border=\"0\" src=\""+product_am[0][i]+"\" alt=\"Amazon\">"
+        print "<a href=\""+product_am[1][i]+"\">CLICK THIS TO TAKE YOU TO AMAZONS PAGE TO BUY THE PRODUCT</a>"
+        print "\n<p>PRICE : Rs."+product_am[3][i]+"</p>";
+
+    print "\n<h1>EBAY</h1>";    
+    for i in range(3):
+        print "\n<h2>"+product_eb[2][i]+"</h2>"
+        print "<img border=\"0\" src=\""+product_eb[0][i]+"\" alt=\"EBay\">"
+        print "<a href=\""+product_eb[1][i]+"\">CLICK THIS TO TAKE YOU TO EBAYS PAGE TO BUY THE PRODUCT</a>"
+        print "\n<p>PRICE : Rs."+product_eb[3][i]+"</p>";
+
+    print "\n<h1>FLIPKART</h1>";
+    for i in range(3):
+        print "\n<h2>"+product_fk[2][i]+"</h2>"
+        print "<img border=\"0\" src=\""+product_fk[0][i]+"\" alt=\"Flipkart\">"
+        print "<a href=\""+product_fk[1][i]+"\">CLICK THIS TO TAKE YOU TO FLIPKARTS PAGE TO BUY THE PRODUCT</a>"
+        print "\n<p>PRICE : Rs."+product_fk[3][i]+"</p>";
+
+
+    print "\n<h1>CROMA RETAIL</h1>";
+    for i in range(3):
+        print "\n<h2>"+product_cr[2][i]+"</h2>"
+        print "<img border=\"0\" src=\""+product_cr[0][i]+"\" alt=\"CROMA\">"
+        print "<a href=\""+product_cr[1][i]+"\">CLICK THIS TO TAKE YOU TO CROMA PAGE TO BUY THE PRODUCT</a>"
+        print "\n<p>PRICE : "+product_cr[3][i]+"</p>";
+
+    print "<a href=\"/comparison.html\">CLICK HERE FOR A COMPARISON OF DIFFERENT BRANDS</a>"
+    print "</body>\n</html>"
+
 def link_fk_actu(product_image):
     Flipkart_query = "http://www.flipkart.com/all-categories/pr?p%5B%5D=sort%3Drelevance&sid=search.flipkart.com&q=";
-    print "\n\n\n\n\nLINK FK ACTUAL";
+#    print "\n\n\n\n\nLINK FK ACTUAL";
 #    print product_image;
     names = [];
     for i in range(3):
@@ -12,7 +49,7 @@ def link_fk_actu(product_image):
     return names;
 
 def price_fk(product_image):
-    print "\n\n\n\n\nPRICE FK";
+#    print "\n\n\n\n\nPRICE FK";
 #    print product_image;
     names = [];
     for i in range(3):
@@ -22,7 +59,7 @@ def price_fk(product_image):
     return names;
 
 def name_fk(product_image):
-    print "\n\n\n\n\nNAME FK";
+#    print "\n\n\n\n\nNAME FK";
 #    print product_image;
     names = [];
     for i in range(3):
@@ -32,7 +69,7 @@ def name_fk(product_image):
     return names;
 
 def link_fk(product_link):
-    print "\n\n\n\n\nLINK FK";
+#    print "\n\n\n\n\nLINK FK";
 #    print product_link;
     beg_string = "www.flipkart.com";
     links = [];
@@ -304,3 +341,5 @@ if __name__=="__main__":
     product_am = process_am(am_lines);
     product_cr = process_cr(cr_lines);
     product_eb = process_eb(eb_lines);
+    
+    buildwebpage(product_fk,product_cr,product_am,product_eb);
