@@ -35,6 +35,7 @@ def buildwebpage(product_fk,product_cr,product_am,product_eb):
         print "\n<p>PRICE : "+product_cr[3][i]+"</p>";
 
     print "<a href=\"/comparison.html\">CLICK HERE FOR A COMPARISON OF DIFFERENT BRANDS</a>"
+    print "<a href=\"/crowd.html\">CLICK HERE FOR WHAT THE CROWD THINKS OF THE PRODUCT</a>"
     print "</body>\n</html>"
 
 def link_fk_actu(product_image):
