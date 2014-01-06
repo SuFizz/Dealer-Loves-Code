@@ -1,9 +1,70 @@
 import urllib
+import twython
 
-def buildwebpage(product_fk,product_cr,product_am,product_eb):
+def Crowd_twitter(query):
+    consumer_key = '*****';
+    consumer_secret = '*****';
+    access_token = '******';
+    access_token_secret = '******';
+
+    client_args = {'proxies': {'https': 'http://10.93.0.37:3333'}}
+
+    t = twython.Twython(app_key=consumer_key, 
+            app_secret=consumer_secret, 
+            oauth_token=access_token, 
+            oauth_token_secret=access_token_secret,
+            client_args = client_args)
+
+#    query=raw_input("What do you want to search for?");
+#    query.replace(" ","+");
+    output = t.search(q=query, result_type='popular', count=10)          #purposely restricted to 10 users to protect from Spamming the Twitter server which could cause blacklisting of our server
+
+    #print output;
+
+    aggregater = []
+    for i in range(10):
+        aggregater.append(output[u'statuses'][i][u'text']);
+
+    happy = open("positive-words.txt",'r')
+    sad = open("negative-words.txt",'r')
+    ha = happy.readlines()
+    sa = sad.readlines()
+    happy.close()
+    sad.close()
+
+    for i in range(len(ha)):
+        ha[i]=ha[i].rstrip()
+
+    for i in range(len(sa)):
+        sa[i]=sa[i].rstrip()
+
+    #Put basic sentiment analysis on tweet
+    posi = 0;
+    negi = 0;
+    for i in range(10):
+        for j in range(len(ha)):
+            if(ha[j] in aggregater[i]):
+                posi += 1;
+        for j in range(len(sa)):
+            if(sa[j] in aggregater[i]):
+                negi += 1;
+
+    #print "<!DOCTYPE html>\n<html>\n<title>Crowd likes!</title>"
+    if posi > negi:
+        return "<h1>CROWD LOVES IT!!:-)</h1>"
+    elif posi<negi:
+        return "<h1>CROWD DOESN'T LIKE IT!! :-( </h1>"
+    else:
+        return "<h1>CROWD CAN'T DECIDE :-| !!</h1>"
+
+
+def buildwebpage(product_fk,product_cr,product_am,product_eb,search_query):
 #            return images,links,names,prices
     print "<!DOCTYPE html>\n<html>";
     print "\n<h1><em><ul>WELCOME TO DEALERSITE - ONE STOP FOR ALL YOUR SHOPPING</ul></em></h1>\n<body>"
+
+    print "<h1>THIS IS WHAT THE CROWD THINKS OF "+search_query+":</h1>"
+    print Crowd_twitter(search_query)
 
     print "\n<h1>AMAZON</h1>";
     for i in range(3):
@@ -34,8 +95,8 @@ def buildwebpage(product_fk,product_cr,product_am,product_eb):
         print "<a href=\""+product_cr[1][i]+"\">CLICK THIS TO TAKE YOU TO CROMA PAGE TO BUY THE PRODUCT</a>"
         print "\n<p>PRICE : "+product_cr[3][i]+"</p>";
 
-    print "<a href=\"/comparison.html\">CLICK HERE FOR A COMPARISON OF DIFFERENT BRANDS</a>"
-    print "<a href=\"/crowd.html\">CLICK HERE FOR WHAT THE CROWD THINKS OF THE PRODUCT</a>"
+    print "<a href=\"/comparison.html\"><em><b>CLICK HERE FOR A COMPARISON OF DIFFERENT BRANDS</b></em></a>"
+#    print "<a href=\"/crowd.html\">CLICK HERE FOR WHAT THE CROWD THINKS OF THE PRODUCT</a>"
     print "</body>\n</html>"
 
 def link_fk_actu(product_image):
@@ -343,4 +404,5 @@ if __name__=="__main__":
     product_cr = process_cr(cr_lines);
     product_eb = process_eb(eb_lines);
     
-    buildwebpage(product_fk,product_cr,product_am,product_eb);
+    buildwebpage(product_fk,product_cr,product_am,product_eb,search_query);
+#    Crowd_twitter();
