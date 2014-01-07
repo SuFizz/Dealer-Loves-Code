@@ -22,3 +22,20 @@ TO use the program:
 6. Also, to generate the Social Media thing - run SocialMediaProminence.py
 7. Again repeat the process from 3-4 and name it as comparison.html
 8. We are all set!!
+
+
+
+Simple Explanation of Product:
+
+USER ENTERS A SEARCH QUERY
+========>
+App searches for product in FlipKart, EBay, Amazon, Croma Retail
+========>
+App searches for the relevance among different social media for FlipKart, EBay, Amazon, Croma (comparing with FaceBook and Google+ posts and Tweets to get the best idea about how good each of the companies does in comparison to each other)
+========>
+App does Sentiment Analysis on Tweets to get the best idea of the crowd about the search query
+========>
+App generates complete HTML page in standard HTML5 format.
+========>
+User seamlessly buys his best product - TOTAL POWER TO THE USER!
+        ^_^
